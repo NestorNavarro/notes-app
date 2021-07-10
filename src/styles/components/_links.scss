@@ -1,0 +1,13 @@
+.link {
+    color: $primary;
+
+    &:hover {
+        color: darken($color: $primary, $amount: 15);
+    }
+}
+
+.link__back {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}

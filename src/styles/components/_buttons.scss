@@ -1,0 +1,55 @@
+.btn-own {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 7px 10px 7px 10px;
+
+    &:focus{
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.btn-primary-own {
+    background-color: $primary;
+    border-radius: 5px;
+    height: 40px;
+    
+    &:disabled {
+        background-color: lighten($color: $primary, $amount: 15);
+    }
+
+    &:hover {
+        background-color: darken($color: $primary, $amount: 15);
+    }
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-icon {
+    &:active {
+        transform: translateY(2px);
+    }
+    &:hover {
+        color: darken($color: $background-component, $amount: 15);
+    }
+}
+
+.btn-add-note {
+    background: linear-gradient(to left, $btnadd-light-blue,  $btnadd-dark-blue);
+    border-radius: 5px;
+    font-size: 12px;
+    min-width: 150px;
+    padding: 13px 15px 13px 15px;
+
+    &:active {
+        transform: translateY(2px);
+    }
+    &:hover {
+        background: lighten($color:  $btnadd-dark-blue, $amount: 20)  
+    }
+}
