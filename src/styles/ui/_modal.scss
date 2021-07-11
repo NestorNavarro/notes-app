@@ -1,0 +1,99 @@
+.modal__container {
+    background: rgba(153, 153, 153, 0.3);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+.modal-own {
+    background: white;
+    border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.2);
+    width: 450px;
+
+}
+
+.modal__header {
+    align-content: center;
+    background-color: lighten($color: $background, $amount: 2);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    padding: 10px;
+
+    & i, h3{
+        color:darken($color: $text, $amount: 10);
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+
+    & i {
+        margin-left: 10px;
+        &:active {
+            transform: translateY(2px);
+        }
+        &:hover {
+            color:  $text;
+        }
+    }
+}
+
+.modal__close{
+    align-items: center;
+    background-color: $background-component;
+    border-radius: 5px;
+    box-shadow: -2px 2px 5px 1px rgba(168, 168, 168, 0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    
+    top: -210px;
+    left: 455px;
+    height: 35px;
+    width: 35px;
+
+    &:hover{
+        background-color: darken($color: $background-component, $amount: 25);
+    }
+}
+
+.modal__content {
+    padding: 20px;
+    font-size: 12px;
+}
+
+.modal__input, .modal__textarea {
+    border: 2px solid $light-grey;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    &:focus {
+        outline: none;
+    }
+}
+
+.modal__input {
+    height: 50px;
+    &::placeholder {
+        color: lighten($color: $text, $amount: 20);
+        font-size: 16px;
+    }
+}
+
+.modal__textarea {
+    height: 130px;
+    resize: none;
+    &::placeholder {
+        color: lighten($color: $text, $amount: 20);
+    }
+}

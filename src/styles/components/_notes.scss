@@ -16,13 +16,16 @@
 
 .notes__navbar-content {
     float: left;
-
+    display: block;
+    padding: 15px 5px 15px 5px;
+    
     & i{
         margin-top: 5px;
     }
-    & i, span{
-        display: block;
-        padding: 15px 5px 15px 5px;
+    & span{
+       color: black;
+       font-size: 13px;
+       font-weight: bold;
     }
 }
 .notes__entry {

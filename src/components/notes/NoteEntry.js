@@ -7,7 +7,7 @@ export const NoteEntry = () => {
                 <h3 className="notes__entry-title">¡Title!</h3>
                 <div className="notes__head-icons">
                     <i className="far fa-edit  fa-lg mr-5-own" ></i>
-                    <i class="fas fa-times  fa-lg"></i>
+                    <i className="fas fa-times  fa-lg"></i>
                 </div>
             </div>
             <hr/>

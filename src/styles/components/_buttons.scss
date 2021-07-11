@@ -53,3 +53,20 @@
         background: lighten($color:  $btnadd-dark-blue, $amount: 20)  
     }
 }
+
+.btn-modal {
+    background-color: $btnadd-dark-blue;
+    border-radius: 5px;
+    float: right;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    min-width: 140px;
+    padding: 10px 15px 10px 15px;
+
+    &:active {
+        transform: translateY(2px);
+    }
+    &:hover {
+        background: lighten($color:  $btnadd-dark-blue, $amount: 20)  
+    }
+}
