@@ -37,12 +37,11 @@ export const startResetPassword = (token, password, history) => {
         dispatch( startLoading() );
         const resp = await formDataResetPassword(token, password); 
         if(resp?.ok) {
-            dispatch( logout() );
             history.replace('/auth/login');
         } else if(resp?.err){
             const {err} = resp;
             dispatch( samePassword(token, err) );
-        }
+        }     
         dispatch( finishLoading() );
     };
 } 

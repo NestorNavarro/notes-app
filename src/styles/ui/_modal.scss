@@ -36,15 +36,6 @@
         margin-top: 5px;
     }
 
-    & i {
-        margin-left: 10px;
-        &:active {
-            transform: translateY(2px);
-        }
-        &:hover {
-            color:  $text;
-        }
-    }
 }
 
 .modal__close{

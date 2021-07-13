@@ -1,21 +1,39 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteNote, editNote } from '../../actions/notes';
+import { showModal } from '../../actions/ui';
 
-export const NoteEntry = () => {
+export const NoteEntry = ({note}) => {
+    const dispatch = useDispatch();
+
+    const {title, body} = note;
+
+    const handleEditNote = () => {
+        dispatch( editNote(title, body) );
+        dispatch( showModal() );
+    }
+    const handleDelete = () => {
+        dispatch( deleteNote(title) );
+    }
     return (
         <div className="card notes__entry">
             <div className="notes__entry-head">
-                <h3 className="notes__entry-title">¡Title!</h3>
+                <h3 className="notes__entry-title">{title}</h3>
                 <div className="notes__head-icons">
-                    <i className="far fa-edit  fa-lg mr-5-own" ></i>
-                    <i className="fas fa-times  fa-lg"></i>
+                    <i 
+                        className="far fa-edit  fa-lg mr-5-own" 
+                        onClick={handleEditNote}
+                    />
+                    <i 
+                        className="fas fa-times  fa-lg" 
+                        onClick={handleDelete}
+                    />
                 </div>
             </div>
             <hr/>
             <div className="notes__entry-body">
                 <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo laborum, 
-                    pariatur ex quas similique atque at consequuntur expedita doloribus, dolorum, 
-                    odio fugit unde incidunt minima maxime nulla. Est, ad maiores.
+                    {body}
                 </p>
             </div>
         </div>

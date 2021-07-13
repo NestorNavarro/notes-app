@@ -1,14 +1,18 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { NoteEntry } from './NoteEntry';
 
 export const NotesEntries = () => {
-    const notes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    const {notes} = useSelector(state => state.note)
 
     return (
         <div className="card-columns">
             {
-                notes.map(note => (
-                    <NoteEntry key={note} />
+                notes.map((note, index) => (
+                    <NoteEntry 
+                        key={note.title + index} 
+                        note={note}
+                    />
                 ))
             }
         </div>

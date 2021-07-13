@@ -16,8 +16,8 @@ export const LoginScreen = () => {
         email: 'martin@inprodi.com',
         password: 'martin123',
     });
-    
     const {email, password} = formValue;
+    
     const input = document.getElementsByTagName('input');
 
     const isUserValid =  React.useCallback(() => { 

@@ -35,7 +35,6 @@ export const ResetScreen = ( value ) => {
         e.preventDefault();
         if(isFormValid()){
             dispatch( startResetPassword(auth.token, password1, history) );
-            console.log('succes')
         } 
     }
     const isFormValid = () => {
