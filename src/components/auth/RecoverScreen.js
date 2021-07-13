@@ -1,7 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import validator from 'validator';
+import { startRecoverPassword } from '../../actions/auth';
+import { handleErrors } from '../../helpers/handleErrors';
+import useForm from '../../hooks/useForm';
 
-export const RecoverScreen = () => {
+export const RecoverScreen = ( value ) => {
+    const { history } = value;
+
+    const dispatch = useDispatch();
+    const {loading} = useSelector(state => state.ui);
+    const auth = useSelector(state => state.auth);
+
+    const [error, setError] = useState(true);
+    const [ formValue, handleInputChange ] = useForm({ email: 'martin@inprodi.com' });
+    const {email} = formValue;
+    const input = document.getElementsByTagName('input');
+
+    useEffect(() => {
+        if(auth?.token){
+            handleErrors(true, input, setError);
+            history.push('/auth/reset');
+        } 
+        if(auth?.err) {
+            handleErrors(false, input, setError);
+        }
+    }, [auth, input, history]);
+   
+    const handleRecover = (e) => {
+        e.preventDefault();
+        if(isFormValid()){
+            dispatch( startRecoverPassword(email) );
+        }
+    }
+    const isFormValid = () => {
+        const isValid = validator.isEmail(email)
+        if(!isValid){
+            handleErrors(false, input, setError);
+            return false;
+        }
+        handleErrors(isValid, input, setError);
+        return true;
+    }
+
     return (
         <>
             <h3 className="auth__title mb-5-own">¿Olvidaste tu constraseña</h3>
@@ -9,7 +51,7 @@ export const RecoverScreen = () => {
                 Ingresa tu correo electrónico y te enviaremos
                 intrucciones para restablecer tu contraseña
             </p>
-            <form>
+            <form onSubmit={ handleRecover }>
                 <p>Correo Electrónico</p>
                 <input
                     type="text"
@@ -17,18 +59,20 @@ export const RecoverScreen = () => {
                     name="email"
                     className="auth__input"
                     autoComplete="off"
+                    value={email}
+                    onChange={handleInputChange}
                 />
                 <p
                     className="auth__text-error"
-                    hidden={true}
+                    hidden={error}
                 >
-                    Ingresa un correo electrónico válido.<br /><br />
+                    Ingresa un correo electrónico válido.<br />
                     El correo electrónico no está asociado a ninguna cuenta.
                 </p>
                 <button
                     className="btn-own btn-primary-own btn-block mt-5-own l-sp"
                     type="submit"
-                    disabled={false}
+                    disabled={loading}
                 >
                     Enviar Instrucciones
                 </button>

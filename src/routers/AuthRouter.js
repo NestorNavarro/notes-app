@@ -15,12 +15,11 @@ export const AuthRouter = () => {
                 <Switch>
                     <Route exact path="/auth/login" component={LoginScreen} />
                     <Route exact path="/auth/recover" component={RecoverScreen} />
-                    <Route exact path="/auth/reset" component={ResetScreen} />
+                    <Route exact path="/auth/reset" component={ ResetScreen } />
 
                     <Redirect to="/auth/login" />
                 </Switch>
             </div>
-
         </div>
     );
 }

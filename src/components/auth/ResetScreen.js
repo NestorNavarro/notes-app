@@ -1,7 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import validator from 'validator';
+import { logout, startResetPassword } from '../../actions/auth';
+import { handleErrors } from '../../helpers/handleErrors';
+import useForm from '../../hooks/useForm';
 
-export const ResetScreen = () => {
+export const ResetScreen = ( value ) => {
+    const {history} = value; 
+    const input = document.getElementsByTagName('input');
+    const auth = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+
+    if(!auth.token){
+        history.replace('/auth/login')
+    }
+
+    useEffect(() => {
+        if(auth?.err) {
+            handleErrors(false, input, setError);
+        } else{
+            handleErrors(true, input, setError);
+        }
+    }, [auth, input]);
+
+    const [error, setError] = useState(true);
+    const [ formValue, handleInputChange ] = useForm({
+        password1: '',
+        password2: '',
+    });
+    const {password1, password2} = formValue;
+
+    const handleReset = (e) => {
+        e.preventDefault();
+        if(isFormValid()){
+            dispatch( startResetPassword(auth.token, password1, history) );
+            console.log('succes')
+        } 
+    }
+    const isFormValid = () => {
+        if(!validator.isStrongPassword(password1)){
+            handleErrors(false, input, setError);
+            return false;
+        }
+        if(password1 !== password2) {
+            handleErrors(false, input, setError);
+            return false;
+        }
+        handleErrors(true, input, setError);
+        return true;
+    }
+    const handleBack = () => {
+        dispatch( logout() );
+    }
     return (
         <>
             <h3 className="auth__title mb-5-own">Restablecer Contraseña</h3>
@@ -9,17 +60,19 @@ export const ResetScreen = () => {
                 Establece tu nueva constraseña y guárdala en un 
                 lugar seguro.
             </p>
-            <form>
+            <form onSubmit={handleReset}>
                 <p>Nueva contraseña</p>
                 <input
                     type="password"
                     placeholder="   Ingresa Nueva contraseña"
-                    name="password"
+                    name="password1"
                     className="auth__input"
+                    value={password1}
+                    onChange={handleInputChange}
                 />
                 <p
                     className="auth__text-error mb-5-own"
-                    hidden={true}
+                    hidden={error}
                 >
                     La contraseña debe tener al menos 8 caracteres,<br />
                     caracters espcieles , letras mayúsculas y minúsculas.<br />
@@ -29,12 +82,14 @@ export const ResetScreen = () => {
                 <input
                     type="password"
                     placeholder="   Confirmar contraseña"
-                    name="password"
+                    name="password2"
                     className="auth__input"
+                    value={password2}
+                    onChange={handleInputChange}
                 />
                 <p
                     className="auth__text-error mb-5-own"
-                    hidden={true}
+                    hidden={error}
                 >
                     Las contraseñas no coinciden.
                 </p>
@@ -46,6 +101,7 @@ export const ResetScreen = () => {
                     Restablecer contraseña
                 </button>
                 <Link
+                    onClick={handleBack}
                     className="link link__back mt-5-own"
                     to="/auth/login"
                 >
