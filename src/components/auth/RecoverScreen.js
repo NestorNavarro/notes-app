@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
-import { startRecoverPassword } from '../../actions/auth';
+import { logout, startRecoverPassword } from '../../actions/auth';
 import { handleErrors } from '../../helpers/handleErrors';
 import useForm from '../../hooks/useForm';
 
@@ -43,6 +43,9 @@ export const RecoverScreen = ( value ) => {
         handleErrors(isValid, input, setError);
         return true;
     }
+    const handleBackPage = () => {
+        dispatch( logout() );
+    }
 
     return (
         <>
@@ -79,6 +82,7 @@ export const RecoverScreen = ( value ) => {
                 <Link
                     className="link link__back mt-5-own"
                     to="/auth/login"
+                    onClick={handleBackPage}
                 >
                     Regresar
                 </Link>

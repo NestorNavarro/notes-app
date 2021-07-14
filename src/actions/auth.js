@@ -6,7 +6,7 @@ export const startEmailPassword = (email, password) => {
     return async(dispatch) => {
         dispatch( startLoading() );
         const resp = await formDataLoging(email, password); 
-        if(resp.token) {
+        if(resp?.token) {
             const {token, user} = resp;
             dispatch( login(token, user._id, user.name) );
         } else{
@@ -21,7 +21,7 @@ export const startRecoverPassword = (email) => {
     return async(dispatch) => {
         dispatch( startLoading() );
         const resp = await formDataRecoverPassword(email); 
-        if(resp.token) {
+        if(resp?.token) {
             const {token} = resp;
             dispatch( recoverPassword(token, email) );
         } else{

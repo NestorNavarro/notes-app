@@ -20,20 +20,29 @@ export const LoginScreen = () => {
     
     const input = document.getElementsByTagName('input');
 
-    const isUserValid =  React.useCallback(() => { 
-        if(auth?.token) {
-            handleErrors(true, input, setError);
-        } else if(auth?.err){
-            handleErrors(false, input, setError);
-        }
+    // const isUserValid =  React.useCallback(() => { 
+    //     if(auth?.token) {
+    //         handleErrors(true, input, setError);
+    //     } else if(auth?.err){
+    //         handleErrors(false, input, setError);
+    //     }
        
-    }, [auth, input]);
+    // }, [auth, input]);
 
     useEffect(() => {
-        if(loading === false){
-            isUserValid(); 
+        if(auth?.token){
+            handleErrors(true, input, setError);
+        } 
+        if(auth?.err) {
+            handleErrors(false, input, setError);
         }
-    }, [loading, isUserValid]);
+    }, [auth, input]);
+
+    // useEffect(() => {
+    //     if(loading === false){
+    //         isUserValid(); 
+    //     }
+    // }, [loading, isUserValid]);
 
     const handleLogin = async(e) => {
         e.preventDefault();
