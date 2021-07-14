@@ -14,7 +14,7 @@ export const RecoverScreen = ( value ) => {
     const auth = useSelector(state => state.auth);
 
     const [error, setError] = useState(true);
-    const [ formValue, handleInputChange ] = useForm({ email: 'martin@inprodi.com' });
+    const [ formValue, handleInputChange ] = useForm({ email: '' });
     const {email} = formValue;
     const input = document.getElementsByTagName('input');
 

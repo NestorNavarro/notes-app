@@ -13,21 +13,11 @@ export const LoginScreen = () => {
 
     const [error, setError] = useState(true);
     const [ formValue, handleInputChange ] = useForm({
-        email: 'martin@inprodi.com',
-        password: 'martin123',
+        email: '',
+        password: '',
     });
     const {email, password} = formValue;
-    
     const input = document.getElementsByTagName('input');
-
-    // const isUserValid =  React.useCallback(() => { 
-    //     if(auth?.token) {
-    //         handleErrors(true, input, setError);
-    //     } else if(auth?.err){
-    //         handleErrors(false, input, setError);
-    //     }
-       
-    // }, [auth, input]);
 
     useEffect(() => {
         if(auth?.token){
@@ -37,12 +27,6 @@ export const LoginScreen = () => {
             handleErrors(false, input, setError);
         }
     }, [auth, input]);
-
-    // useEffect(() => {
-    //     if(loading === false){
-    //         isUserValid(); 
-    //     }
-    // }, [loading, isUserValid]);
 
     const handleLogin = async(e) => {
         e.preventDefault();

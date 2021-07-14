@@ -4,7 +4,6 @@ import { addNewNote, editNoteClean, updateNote } from '../../actions/notes';
 import { closeModal } from '../../actions/ui';
 import useForm from '../../hooks/useForm';
 
-
 export const Modal = () => {
     const { edit } = useSelector(state => state.note);
     const dispatch = useDispatch();
